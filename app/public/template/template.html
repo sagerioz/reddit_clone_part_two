@@ -40,12 +40,77 @@
   <div ng-if="$ctrl.formVisible" class="row">
     <div class="col-md-8">
 
+
+<!-- another form -->
+
+<form name="$ctrl.userForm" novalidate class="form" ng-submit="$ctrl.createPost()" >
+
+       <!-- TITLE -->
+       <div class="form-group" ng-class="{ 'has-error' : $ctrl.userForm.title.$invalid && !$ctrl.userForm.title.$pristine }">
+           <label>Title</label>
+           <input type="text" name="title" class="form-control" ng-model="$ctrl.postObj.title" required>
+           <p ng-show="$ctrl.userForm.title.$invalid && !$ctrl.userForm.title.$pristine" class="help-block">Your title is required.</p>
+       </div>
+
+       <!-- AUTHOR -->
+       <div class="form-group" ng-class="{ 'has-error' : $ctrl.userForm.author.$invalid && !$ctrl.userForm.author.$pristine }">
+           <label>Author</label>
+           <input
+           name="author"
+           ng-model="$ctrl.postObj.author"
+           required
+           minlength="1"
+           type="text"
+           class="form-control"
+           id="author">
+           <p ng-show="$ctrl.userForm.author.$error.minlength" class="help-block">Author's name is required.</p>
+       </div>
+
+       <!-- IMAGE -->
+       <div class="form-group" ng-class="{ 'has-error' : $ctrl.userForm.img_url.$invalid && !$ctrl.userForm.img_url.$pristine }">
+           <label>Image</label>
+           <input
+           name="img_url"
+           required
+           ng-model="$ctrl.postObj.image_url"
+           type="url"
+           class="form-control"
+           id="img_url">
+           <p ng-show="$ctrl.userForm.img_url.$invalid && !$ctrl.userForm.img_url.$pristine" class="help-block">Enter an image url, for example http://www...</p>
+       </div>
+
+      <!-- BODY -->
+       <div class="form-group" ng-class="{ 'has-error' : $ctrl.userForm.body.$invalid && !$ctrl.userForm.body.$pristine }">
+           <label>Description</label>
+           <textarea
+           name="body"
+           required
+           ng-model="$ctrl.postObj.body"
+           maxlength="255"
+           type="text"
+           class="form-control"
+           id="body"></textarea>
+           <p ng-show="$ctrl.userForm.body.$invalid && !$ctrl.userForm.body.$pristine" class="help-block">Please enter text here.</p>
+       </div>
+
+       <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.userForm.$invalid">Submit</button>
+
+   </form>
+
+
+
+
+
+
+
  <!-- Form -->
 
- <form name="$ctrl.userForm" novalidate class="form" ng-submit="$ctrl.createPost()" >
+ <!-- <form name="$ctrl.userForm" novalidate class="form" ng-submit="$ctrl.createPost()" >
  <div class="form-group" ng-class="{
    'has-error' : $ctrl.userForm.title.$invalid,
    'has-error' : $ctrl.userForm.author.$invalid,
+   'has-error' : $ctrl.userForm.img.$invalid,
+   'has-error' : $ctrl.userForm.body.$invalid
  }">
  <label class="control-label" for="title">Title</label><br>
   <input
@@ -56,7 +121,19 @@
   type="text"
   class="form-control"
   id="title">
-  <span ng-show="$ctrl.userForm.title.$error">Title must be entered</span><br>
+  <span ng-show="$ctrl.userForm.title.$error && $ctrl.userForm.$dirty">Title must be entered</span><br>
+
+
+  <div class="form-group" ng-class="{ 'has-error' : $ctrl.userForm.name.$invalid && !$ctrl.userForm.name.$pristine }">
+              <label>Name</label>
+              <input type="text" name="name" class="form-control" ng-model="user.name" required>
+              <p ng-show="$ctrl.userForm.name.$invalid && !$ctrl.userForm.name.$pristine" class="help-block">You name is required.</p>
+          </div>
+
+
+
+
+
 
   <label class="control-label" for="author">Author</label><br>
    <input
@@ -67,36 +144,49 @@
    type="text"
    class="form-control"
    id="author">
-   <span ng-show="$ctrl.userForm.author.$error">Author must be entered</span><br>
+   <span ng-show="$ctrl.userForm.author.$invalid && $ctrl.userForm.$dirty">Author must be entered</span><br>
+
+
+
+
+
+
+
 
 
    <label class="control-label" for="img">Image URL</label><br>
     <input
     name="img"
+    required
     ng-model="$ctrl.postObj.image_url"
     type="url"
     class="form-control"
     id="img">
+    <span ng-show="$ctrl.userForm.img.$error && $ctrl.userForm.$dirty">Enter an image, http://www.image.com...</span><br>
 
     <label class="control-label" for="body">Body</label><br>
      <textarea
      name="body"
+     required
      ng-model="$ctrl.postObj.body"
      maxlength="255"
      type="text"
      class="form-control"
-     id="description"></textarea>
+     id="body">
+     <span ng-show="$ctrl.userForm.body.$error && $ctrl.userForm.$dirty">Enter some text</span><br>
+
+     </textarea>
 
   </div>
 
- <button value="Submit" class="btn btn-primary">Submit</button><br>
- </form>
+ <button value="Submit" ng-disabled="$ctrl.userForm.$invalid" class="btn btn-primary">Submit</button><br>
+ </form> -->
 
 <!-- end form -->
 
     </div>
   </div>
-
+<br>
   <div class="row">
    <div class="col-md-12">
     <div ng-repeat="posts in $ctrl.blogDb | orderBy:$ctrl.selectedOptionValue:true | filter:$ctrl.searchText">
@@ -106,6 +196,7 @@
         </div>
         <div class="media-body">
           <h4 class="media-heading">
+            <a ng-click="$ctrl.deletePosts(posts)"> ❌ </a>
             {{ posts.title }}
             |
             <a ng-click="$ctrl.countVotesUp(posts)"><i class="glyphicon glyphicon-arrow-up"></i></a>
@@ -115,7 +206,7 @@
           <div class="text-right">
             {{ posts.author }}
           </div>
-          <img ng-src="{{ posts.image_url }}" alt="{{ posts.author }}" id="img_posts"/>
+          <img ng-src="{{ posts.image_url }}" alt="{{ posts.author }}" id="{{ posts.id }}"/>
           <p>
             {{ posts.body }}
           </p>
@@ -123,7 +214,7 @@
             {{ posts.created_at }}
             |
             <i class="glyphicon glyphicon-comment"></i>
-            <a ng-click="$ctrl.toggleComment()">
+            <a ng-click="$ctrl.toggleComments(posts)">
               <ng-pluralize count="posts.comments.length"
                     when="{'0': 'No comments',
                         '1': '1 Comment.',
@@ -133,7 +224,7 @@
 
 
           </div>
-          <div class="row" ng-if="$ctrl.commentsVisible">
+          <div class="row" ng-if="posts.commentsVisible">
             <div class="col-xs-10">
 
               <hr>
