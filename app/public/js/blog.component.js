@@ -61,18 +61,20 @@
       console.log("WHATS THIS", posts.commentsVisible);
     };
 
-    // blogService.countVotesUp(posts).then(function(data) {
-    //   console.log("UP COUNT IN COMPONENT FUNCTION", data);
-    //   console.log("POST COUNT IN COMPONENT FUNCTION", posts.vote_count);
-    //   posts.vote_count += 1
-    // });
+    vm.countVotesUp = function (posts) {
+      blogService.countVotesUp(posts).then(function(data){
+        console.log("UP COUNT IN COMPONENT FUNCTION", data);
+        console.log("POST COUNT IN COMPONENT FUNCTION", posts.vote_count);
+        posts.vote_count += 1
+      })
+    }
 
     vm.countVotesDown = function(posts) {
-      let temp = posts.vote_count
-      if (temp > 0) {
-        posts.vote_count -= 1;
-        console.log("DOWN", temp);
-      }
+      blogService.countVotesDown(posts).then(function(data){
+        console.log("UP COUNT IN COMPONENT FUNCTION", data);
+        console.log("POST COUNT IN COMPONENT FUNCTION", posts.vote_count);
+        posts.vote_count -= 1
+      })
     };
   }
 }());
