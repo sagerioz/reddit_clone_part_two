@@ -231,12 +231,11 @@
               <div ng-repeat="comment in posts.comments">
               <p>
               {{ comment.content }}
-              {{ comment.post_id }}
               </p>
               </div>
 
               <!-- Comments Form -->
-              <form class="form-inline" ng-submit="$ctrl.createComment(posts)">
+              <form class="form-inline" ng-submit="$ctrl.createComment(posts, posts.newComment)">
                 <div class="form-group">
                   <input class="form-control" ng-model="posts.newComment">
                 </div>

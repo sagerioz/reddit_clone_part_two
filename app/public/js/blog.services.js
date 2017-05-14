@@ -37,6 +37,13 @@
         console.log("DELETED POST OBJ", response);
       })
     }
+    this.createCommentService = function(posts, comment) {
+    //  console.log("THE ID", `/${posts.id}/comments`);
+      return $http.post(`/api/posts/${posts.id}/comments`, {content:comment}).then(function(response) {
+        console.log("ADDED COMMENT", response);
+        return response.data
+      })
+    }
   }
 
 

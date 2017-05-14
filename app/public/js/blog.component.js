@@ -75,6 +75,14 @@
         console.log("POST COUNT IN COMPONENT FUNCTION", posts.vote_count);
         posts.vote_count -= 1
       })
-    };
+    }
+    vm.createComment = function (posts, comment) {
+
+      blogService.createCommentService(posts, comment).then(function(data){
+        console.log("COMMENT DATA", data);
+        posts.comments.push(data)
+        delete posts.newComment
+      })
+    }
   }
 }());
