@@ -11,7 +11,7 @@
 
   function controller(blogService, $stateParams) {
     const vm = this;
-    console.log("VM", vm);
+  //  console.log("VM", vm);
     vm.time = new Date();
 
 
@@ -25,9 +25,9 @@
       vm.formNotVisible = true
 
       blogService.getBlog().then(function(data) {
-        console.log("DATA", data);
+      //  console.log("DATA", data);
         vm.blogDb = data
-        console.log("BLOGDB", vm.blogDb);
+      //  console.log("BLOGDB", vm.blogDb);
       });
     }
 
@@ -41,39 +41,46 @@
         created_at: moment().calendar()
       }
       blogService.sendForm(tempObj).then(function(data) {
-        console.log("DATA after new Form", data);
+      //  console.log("DATA after new Form", data);
         data.comments = []
         vm.blogDb.push(data)
-        console.log("COMMENTS in DATA?", data);
+      //  console.log("COMMENTS in DATA?", data);
         delete vm.postObj;
         vm.toggleForm()
       })
     }
     vm.deletePosts = function(posts) {
-      blogService.deletePost(posts).then(function(data) {
-        console.log("you deleted me");
+      blogService.deletePost(posts).then(function() {
+      console.log("you deleted me");
+      vm.$onInit()
       });
     }
 
-    console.log("LINE 57");
+    //console.log("LINE 57");
     vm.toggleComments = function(posts) {
       posts.commentsVisible = !posts.commentsVisible
-      console.log("WHATS THIS", posts.commentsVisible);
     };
 
     vm.countVotesUp = function (posts) {
       blogService.countVotesUp(posts).then(function(data){
-        console.log("UP COUNT IN COMPONENT FUNCTION", data);
-        console.log("POST COUNT IN COMPONENT FUNCTION", posts.vote_count);
-        posts.vote_count += 1
+        console.log(data);
+      //  data.vote_count += 1
+        posts.vote_count = data.vote_count
+        console.log("UP COUNT DATA(DB)", data);
+        console.log("UP COUNT VOTE_COUNT (CLIENT)", posts.vote_count);
+
+      //  console.log("POST COUNT IN COMPONENT FUNCTION VOTE_COUNT plus one", posts.vote_count, data.vote_count);
+
       })
     }
 
     vm.countVotesDown = function(posts) {
       blogService.countVotesDown(posts).then(function(data){
-        console.log("UP COUNT IN COMPONENT FUNCTION", data);
-        console.log("POST COUNT IN COMPONENT FUNCTION", posts.vote_count);
-        posts.vote_count -= 1
+        console.log(data);
+        //data.vote_count -= 1
+        posts.vote_count = data.vote_count
+        console.log("UP COUNT DATA(DB)", data);
+        console.log("UP COUNT VOTE_COUNT (CLIENT)", posts.vote_count);
       })
     }
     vm.createComment = function (posts, comment) {
