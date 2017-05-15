@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand">Joke Vault</a>
+      <a class="navbar-brand">A Blog</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -97,91 +97,6 @@
 
    </form>
 
-
-
-
-
-
-
- <!-- Form -->
-
- <!-- <form name="$ctrl.userForm" novalidate class="form" ng-submit="$ctrl.createPost()" >
- <div class="form-group" ng-class="{
-   'has-error' : $ctrl.userForm.title.$invalid,
-   'has-error' : $ctrl.userForm.author.$invalid,
-   'has-error' : $ctrl.userForm.img.$invalid,
-   'has-error' : $ctrl.userForm.body.$invalid
- }">
- <label class="control-label" for="title">Title</label><br>
-  <input
-  name="title"
-  ng-model="$ctrl.postObj.title"
-  required
-  minlength="1"
-  type="text"
-  class="form-control"
-  id="title">
-  <span ng-show="$ctrl.userForm.title.$error && $ctrl.userForm.$dirty">Title must be entered</span><br>
-
-
-  <div class="form-group" ng-class="{ 'has-error' : $ctrl.userForm.name.$invalid && !$ctrl.userForm.name.$pristine }">
-              <label>Name</label>
-              <input type="text" name="name" class="form-control" ng-model="user.name" required>
-              <p ng-show="$ctrl.userForm.name.$invalid && !$ctrl.userForm.name.$pristine" class="help-block">You name is required.</p>
-          </div>
-
-
-
-
-
-
-  <label class="control-label" for="author">Author</label><br>
-   <input
-   name="author"
-   ng-model="$ctrl.postObj.author"
-   required
-   minlength="1"
-   type="text"
-   class="form-control"
-   id="author">
-   <span ng-show="$ctrl.userForm.author.$invalid && $ctrl.userForm.$dirty">Author must be entered</span><br>
-
-
-
-
-
-
-
-
-
-   <label class="control-label" for="img">Image URL</label><br>
-    <input
-    name="img"
-    required
-    ng-model="$ctrl.postObj.image_url"
-    type="url"
-    class="form-control"
-    id="img">
-    <span ng-show="$ctrl.userForm.img.$error && $ctrl.userForm.$dirty">Enter an image, http://www.image.com...</span><br>
-
-    <label class="control-label" for="body">Body</label><br>
-     <textarea
-     name="body"
-     required
-     ng-model="$ctrl.postObj.body"
-     maxlength="255"
-     type="text"
-     class="form-control"
-     id="body">
-     <span ng-show="$ctrl.userForm.body.$error && $ctrl.userForm.$dirty">Enter some text</span><br>
-
-     </textarea>
-
-  </div>
-
- <button value="Submit" ng-disabled="$ctrl.userForm.$invalid" class="btn btn-primary">Submit</button><br>
- </form> -->
-
 <!-- end form -->
 
     </div>
@@ -199,6 +114,7 @@
             <a ng-click="$ctrl.deletePosts(posts)"> ❌ </a>
             {{ posts.title }}
             |
+            <a ng-click="$ctrl.editPost(posts)">Edit</a> |
             <a ng-click="$ctrl.countVotesUp(posts)"><i class="glyphicon glyphicon-arrow-up"></i></a>
             <a ng-click="$ctrl.countVotesDown(posts)"><i class="glyphicon glyphicon-arrow-down"></i></a>
             {{ posts.vote_count }}
@@ -206,7 +122,7 @@
           <div class="text-right">
             {{ posts.author }}
           </div>
-          <img ng-src="{{ posts.image_url }}" alt="{{ posts.author }}" id="{{ posts.id }}"/>
+          <img ng-src="{{ posts.image_url }}" alt="{{ posts.author }}" id="{{ posts.id }}" width="400px"/>
           <p>
             {{ posts.body }}
           </p>
@@ -245,10 +161,10 @@
               </form>
 
           </div>
-          </div>
         </div>
       </div>
     </div>
+  </div>
 
     </div>
   </div>

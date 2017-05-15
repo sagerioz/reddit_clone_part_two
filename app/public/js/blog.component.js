@@ -50,12 +50,15 @@
       })
     }
     vm.deletePosts = function(posts) {
-      blogService.deletePost(posts).then(function() {
-      console.log("you deleted me");
-      vm.$onInit()
-      });
-    }
-
+      if (confirm("are you sure you want to delete this post?") == true) {
+        blogService.deletePost(posts).then(function() {
+        console.log("you deleted me");
+        vm.$onInit()
+        });
+          } else {
+          return;
+        }
+      }
     //console.log("LINE 57");
     vm.toggleComments = function(posts) {
       posts.commentsVisible = !posts.commentsVisible
@@ -83,9 +86,19 @@
         console.log("UP COUNT VOTE_COUNT (CLIENT)", posts.vote_count);
       })
     }
+
     vm.createComment = function (posts, comment) {
 
       blogService.createCommentService(posts, comment).then(function(data){
+        console.log("COMMENT DATA", data);
+        posts.comments.push(data)
+        delete posts.newComment
+      })
+    }
+
+    vm.editPosts = function (posts, comment) {
+
+      blogService.editPostService(posts, comment).then(function(data){
         console.log("COMMENT DATA", data);
         posts.comments.push(data)
         delete posts.newComment

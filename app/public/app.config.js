@@ -17,9 +17,9 @@
         component: 'blog'
       })
     //  .state({
-    //     name: 'new',
-    //     url: '/houses/new',
-    //     component: 'houseNew'
+    //     name: 'edit',
+    //     url: '/blog/edit',
+    //     component: 'editBlog'
     //  })
     //  .state({
     //     name: 'show',

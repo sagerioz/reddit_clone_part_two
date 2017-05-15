@@ -51,6 +51,13 @@
         return response.data
       })
     }
+    this.editPostService = function(posts) {
+    //  console.log("THE ID", `/${posts.id}/comments`);
+      return $http.patch(`/api/posts/${posts.id}`, posts).then(function(response) {
+      //  console.log("ADDED COMMENT", response);
+        return response.data
+      })
+    }
   }
 
 
