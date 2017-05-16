@@ -41,7 +41,7 @@
     <div class="col-md-8">
 
 
-<!-- another form -->
+<!-- main form -->
 
 <form name="$ctrl.userForm" novalidate class="form" ng-submit="$ctrl.createPost()" >
 
@@ -114,20 +114,20 @@
             <a ng-click="$ctrl.deletePosts(posts)"> ❌ </a>
             {{ posts.title }}
             |
-            <a ng-click="$ctrl.editPost(posts)">Edit</a> |
+            <a ui-sref="edit({id: {{posts.id}}})">Edit</a> |
             <a ng-click="$ctrl.countVotesUp(posts)"><i class="glyphicon glyphicon-arrow-up"></i></a>
             <a ng-click="$ctrl.countVotesDown(posts)"><i class="glyphicon glyphicon-arrow-down"></i></a>
             {{ posts.vote_count }}
           </h4>
           <div class="text-right">
-            {{ posts.author }}
+          {{ posts.author }}
           </div>
           <img ng-src="{{ posts.image_url }}" alt="{{ posts.author }}" id="{{ posts.id }}" width="400px"/>
           <p>
             {{ posts.body }}
           </p>
           <div>
-            {{ posts.created_at }}
+            <span am-time-ago="posts.created_at"></span>
             |
             <i class="glyphicon glyphicon-comment"></i>
             <a ng-click="$ctrl.toggleComments(posts)">

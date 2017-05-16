@@ -7,15 +7,15 @@
       templateUrl: './template/template.html'
     })
 
-  controller.$inject = ['blogService']
+  controller.$inject = ['blogService', '$state']
 
-  function controller(blogService, $stateParams) {
+  function controller(blogService, $state) {
     const vm = this;
   //  console.log("VM", vm);
     vm.time = new Date();
+    vm.toggleForm = toggleForm
 
-
-    vm.toggleForm = function() {
+    function toggleForm() {
       vm.formVisible = !vm.formVisible
       vm.formNotVisible = !vm.formNotVisible
     };
@@ -50,7 +50,7 @@
       })
     }
     vm.deletePosts = function(posts) {
-      if (confirm("are you sure you want to delete this post?") == true) {
+      if (confirm("are you sure you want to delete this post?") === true) {
         blogService.deletePost(posts).then(function() {
         console.log("you deleted me");
         vm.$onInit()
@@ -96,13 +96,12 @@
       })
     }
 
-    vm.editPosts = function (posts, comment) {
+    console.log("you made it here on your journey line 98");
 
-      blogService.editPostService(posts, comment).then(function(data){
-        console.log("COMMENT DATA", data);
-        posts.comments.push(data)
-        delete posts.newComment
-      })
-    }
+    // vm.editPost = function (posts) {
+    //   console.log("state", $state)
+    //   //console.log("you made it here on your journey")
+    //   $state.go('edit')
+    // }
   }
 }());

@@ -1,0 +1,57 @@
+<!-- edit form -->
+<div class="container">
+<form name="$ctrl.editForm" novalidate class="form" ng-submit="$ctrl.editPost()" >
+
+       <!-- TITLE -->
+       <div class="form-group" ng-class="{ 'has-error' : $ctrl.editForm.title.$invalid && !$ctrl.editForm.title.$pristine }">
+           <label>Title</label>
+           <input type="text" name="title" class="form-control" ng-model="$ctrl.editObj.title" required>
+           <p ng-show="$ctrl.editForm.title.$invalid && !$ctrl.editForm.title.$pristine" class="help-block">Your title is required.</p>
+       </div>
+
+       <!-- AUTHOR -->
+       <div class="form-group" ng-class="{ 'has-error' : $ctrl.editForm.author.$invalid && !$ctrl.editForm.author.$pristine }">
+           <label>Author</label>
+           <input
+           name="author"
+           ng-model="$ctrl.editObj.author"
+           required
+           minlength="1"
+           type="text"
+           class="form-control"
+           id="author">
+           <p ng-show="$ctrl.editForm.author.$error.minlength" class="help-block">Author's name is required.</p>
+       </div>
+
+       <!-- IMAGE -->
+       <div class="form-group" ng-class="{ 'has-error' : $ctrl.editForm.img_url.$invalid && !$ctrl.editForm.img_url.$pristine }">
+           <label>Image</label>
+           <input
+           name="img_url"
+           required
+           ng-model="$ctrl.editObj.image_url"
+           type="url"
+           class="form-control"
+           id="img_url">
+           <p ng-show="$ctrl.editForm.img_url.$invalid && !$ctrl.editForm.img_url.$pristine" class="help-block">Enter an image url, for example http://www...</p>
+       </div>
+
+      <!-- BODY -->
+       <div class="form-group" ng-class="{ 'has-error' : $ctrl.editForm.body.$invalid && !$ctrl.editForm.body.$pristine }">
+           <label>Description</label>
+           <textarea
+           name="body"
+           required
+           ng-model="$ctrl.editObj.body"
+           maxlength="255"
+           type="text"
+           class="form-control"
+           id="body"></textarea>
+           <p ng-show="$ctrl.editForm.body.$invalid && !$ctrl.editForm.body.$pristine" class="help-block">Please enter text here.</p>
+       </div>
+
+       <button type="submit" class="btn btn-primary">Update Post</button>
+
+   </form>
+</div>
+<!-- end form -->

@@ -16,11 +16,11 @@
         url: '/',
         component: 'blog'
       })
-    //  .state({
-    //     name: 'edit',
-    //     url: '/blog/edit',
-    //     component: 'editBlog'
-    //  })
+     .state({
+        name: 'edit',
+        url: '/edit/:id',
+        component: 'editBlog'
+     })
     //  .state({
     //     name: 'show',
     //     url: '/houses/:id',
